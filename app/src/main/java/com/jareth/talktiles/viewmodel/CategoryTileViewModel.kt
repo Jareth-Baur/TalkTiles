@@ -23,5 +23,11 @@ class CategoryTileViewModel(context: Context) : ViewModel() {
     fun update(tile: CategoryTile) = viewModelScope.launch {
         dao.update(tile)
     }
+    fun deleteAll() {
+        viewModelScope.launch {
+            dao.deleteAllCategoryTiles()
+        }
+    }
+
 }
 

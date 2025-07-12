@@ -13,13 +13,14 @@ class WordTileViewModel(private val repository: WordTileRepository) : ViewModel(
 
     val allTiles: Flow<List<WordTile>> = repository.getAllWordTiles()
 
+    fun getAllWordTiles(): Flow<List<WordTile>> = repository.getAll()
+
     fun toggleFavorite(tile: WordTile) {
         val updatedTile = tile.copy(isFavorite = !tile.isFavorite)
         viewModelScope.launch {
-            repository.updateWordTile(updatedTile)
+            repository.update(updatedTile)
         }
     }
-
 
     fun getTilesByCategory(categoryLabel: String): Flow<List<WordTile>> {
         return repository.getByCategory(categoryLabel)
@@ -40,6 +41,17 @@ class WordTileViewModel(private val repository: WordTileRepository) : ViewModel(
     fun delete(wordTile: WordTile) {
         viewModelScope.launch {
             repository.delete(wordTile)
+        }
+    }
+    fun resetFavorites() {
+        viewModelScope.launch {
+            repository.resetFavorites()
+        }
+    }
+
+    fun deleteAll() {
+        viewModelScope.launch {
+            repository.deleteAllWordTiles()
         }
     }
 

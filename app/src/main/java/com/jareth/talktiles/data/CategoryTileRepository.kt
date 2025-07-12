@@ -4,4 +4,7 @@ import kotlinx.coroutines.flow.Flow
 
 class CategoryTileRepository(private val dao: CategoryTileDao) {
     fun getAll(): Flow<List<CategoryTile>> = dao.getAll()
+
+    suspend fun deleteAllCategoryTiles() = dao.deleteAllCategoryTiles()
+
 }

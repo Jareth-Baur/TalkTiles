@@ -88,18 +88,21 @@ fun WordTileCard(
             Text(
                 text = if (isFavorite) "❤️" else "🤍",
                 fontSize = 20.sp,
-                modifier = noRippleClickable { onToggleFavorite() }
-
+                modifier = Modifier
+                    .padding(top = 4.dp)
+                    .noRippleClickable { onToggleFavorite() } // <- correct usage
             )
         }
     }
 }
 @Composable
-fun noRippleClickable(onClick: () -> Unit): Modifier {
+fun Modifier.noRippleClickable(onClick: () -> Unit): Modifier {
     val interactionSource = remember { MutableInteractionSource() }
-    return Modifier.clickable(
-        interactionSource = interactionSource,
-        indication = null,
-        onClick = onClick
+    return this.then(
+        Modifier.clickable(
+            interactionSource = interactionSource,
+            indication = null,
+            onClick = onClick
+        )
     )
 }

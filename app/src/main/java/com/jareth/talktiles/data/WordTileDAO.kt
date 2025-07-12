@@ -15,9 +15,6 @@ interface WordTileDao {
     @Query("SELECT * FROM word_tile WHERE category = :category")
     fun getWordsByCategory(category: String): Flow<List<WordTile>>
 
-    @Query("SELECT * FROM word_tile WHERE category = :category")
-    fun getByCategory(category: String): Flow<List<WordTile>>
-
     @Query("SELECT * FROM word_tile")
     fun getAll(): Flow<List<WordTile>>
 
@@ -36,13 +33,10 @@ interface WordTileDao {
     @Query("SELECT * FROM word_tile WHERE isFavorite = 1")
     fun getFavorites(): Flow<List<WordTile>>
 
-    @Update
-    suspend fun updateWordTile(wordTile: WordTile)
+    @Query("UPDATE word_tile SET isFavorite = 0")
+    suspend fun resetFavorites()
 
-    @Query("SELECT * FROM word_tile")
-    fun getAllTiles(): Flow<List<WordTile>>
-
-    @Update
-    suspend fun updateTile(tile: WordTile)
+    @Query("DELETE FROM word_tile")
+    suspend fun deleteAllWordTiles()
 
 }

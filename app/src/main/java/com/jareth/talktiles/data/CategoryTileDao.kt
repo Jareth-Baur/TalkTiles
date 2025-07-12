@@ -27,4 +27,8 @@ interface CategoryTileDao {
 
     @Update
     suspend fun update(tile: CategoryTile) // ← ✅ Add this line
+
+    @Query("DELETE FROM category_tile")
+    suspend fun deleteAllCategoryTiles()
+
 }

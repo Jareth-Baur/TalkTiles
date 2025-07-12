@@ -14,6 +14,7 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.grid.GridCells
+import androidx.compose.foundation.lazy.grid.LazyGridState
 import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
 import androidx.compose.foundation.lazy.grid.items
 import androidx.compose.foundation.rememberScrollState
@@ -30,6 +31,7 @@ import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -40,10 +42,12 @@ import androidx.compose.ui.unit.sp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import com.jareth.talktiles.data.AppDatabase
 import com.jareth.talktiles.data.CategoryTile
-import com.jareth.talktiles.data.WordTile
 import com.jareth.talktiles.data.WordTileRepository
 import com.jareth.talktiles.ui.components.CategoryTileCard
 import com.jareth.talktiles.ui.components.WordTileCard
+import com.jareth.talktiles.ui.screens.ManageCategoriesScreen
+import com.jareth.talktiles.ui.screens.ManageWordTilesScreen
+import com.jareth.talktiles.ui.screens.SettingsScreen
 import com.jareth.talktiles.viewmodel.CategoryTileViewModel
 import com.jareth.talktiles.viewmodel.CategoryTileViewModelFactory
 import com.jareth.talktiles.viewmodel.WordTileViewModel
@@ -54,8 +58,8 @@ import java.util.Locale
 fun MainScreen() {
     val context = LocalContext.current
 
+    // Text-to-Speech setup
     val ttsRef = remember { mutableStateOf<TextToSpeech?>(null) }
-
     LaunchedEffect(Unit) {
         ttsRef.value = TextToSpeech(context) { status ->
             if (status == TextToSpeech.SUCCESS) {
@@ -63,7 +67,6 @@ fun MainScreen() {
             }
         }
     }
-
     DisposableEffect(Unit) {
         onDispose {
             ttsRef.value?.stop()
@@ -71,6 +74,7 @@ fun MainScreen() {
         }
     }
 
+    // ViewModels
     val categoryViewModel: CategoryTileViewModel = viewModel(
         factory = CategoryTileViewModelFactory(context.applicationContext)
     )
@@ -80,115 +84,184 @@ fun MainScreen() {
         factory = WordTileViewModelFactory(wordTileRepository)
     )
 
-    var selectedCategory by remember { mutableStateOf<CategoryTile?>(null) }
-    var sentence by remember { mutableStateOf(listOf<String>()) }
-    var showFavorites by remember { mutableStateOf(false) }
+    // UI states
+    var selectedCategory by rememberSaveable { mutableStateOf<CategoryTile?>(null) }
+    var sentence by rememberSaveable { mutableStateOf(listOf<String>()) }
+    var showFavorites by rememberSaveable { mutableStateOf(false) }
 
-    val allWords by wordViewModel.allTiles.collectAsState(initial = emptyList<WordTile>())
+    // Data
+    val allWords by wordViewModel.allTiles.collectAsState(initial = emptyList())
     val favoriteWords = allWords.filter { it.isFavorite }
+    val categories by categoryViewModel.allCategories.collectAsState(initial = emptyList())
+
+    // ✅ Persistent scroll state for home category grid
+    val categoryGridState = rememberSaveable(saver = LazyGridState.Saver) {
+        LazyGridState()
+    }
+    val favoritesGridState = rememberSaveable(saver = LazyGridState.Saver) {
+        LazyGridState()
+    }
+
+    var inSettings by rememberSaveable { mutableStateOf(false) }
+
+    var isParentModeEnabled by rememberSaveable { mutableStateOf(false) }
+
+    var currentScreen by rememberSaveable { mutableStateOf("main") }
+
 
     Column(
         modifier = Modifier
             .fillMaxSize()
             .padding(8.dp)
     ) {
+        // Sentence bar
+        if (currentScreen != "settings" && currentScreen != "manageWords" && currentScreen != "manageCategories") {
         SentenceBar(
-            words = sentence,
-            onSpeak = {
-                val text = sentence.joinToString(" ")
-                ttsRef.value?.speak(text, TextToSpeech.QUEUE_FLUSH, null, null)
-            },
-            onClear = { sentence = emptyList() },
-            onDeleteLast = {
-                if (sentence.isNotEmpty()) sentence = sentence.dropLast(1)
-            }
-        )
+                words = sentence,
+                onSpeak = {
+                    val text = sentence.joinToString(" ")
+                    ttsRef.value?.speak(text, TextToSpeech.QUEUE_FLUSH, null, null)
+                },
+                onClear = { sentence = emptyList() },
+                onDeleteLast = {
+                    if (sentence.isNotEmpty()) sentence = sentence.dropLast(1)
+                }
+            )
+        }
 
         Spacer(modifier = Modifier.height(8.dp))
 
+        // Main content
         Box(
             modifier = Modifier
                 .weight(1f)
                 .fillMaxWidth()
         ) {
-            when {
-                showFavorites -> {
-                    LazyVerticalGrid(
-                        columns = GridCells.Fixed(3),
-                        contentPadding = PaddingValues(12.dp),
-                        verticalArrangement = Arrangement.spacedBy(12.dp),
-                        horizontalArrangement = Arrangement.spacedBy(12.dp)
-                    ) {
-                        items(favoriteWords) { word ->
-                            WordTileCard(
-                                emoji = word.emoji,
-                                label = word.label,
-                                isFavorite = word.isFavorite,
-                                onClick = { sentence = sentence + word.label },
-                                onToggleFavorite = {
-                                    wordViewModel.toggleFavorite(word.copy(isFavorite = !word.isFavorite))
-                                }
-                            )
-                        }
-                    }
+            when (currentScreen) {
+                "settings" -> {
+                    SettingsScreen(
+                        wordTileViewModel = wordViewModel,
+                        categoryTileViewModel = categoryViewModel,
+                        isParentModeEnabled = isParentModeEnabled,
+                        onToggleParentMode = { isParentModeEnabled = it },
+                        onManageWords = { currentScreen = "manageWords" },
+                        onManageCategories = { currentScreen = "manageCategories" }
+                    )
                 }
-                selectedCategory == null -> {
-                    val categories by categoryViewModel.allCategories.collectAsState(initial = emptyList())
-                    LazyVerticalGrid(
-                        columns = GridCells.Fixed(2),
-                        contentPadding = PaddingValues(12.dp),
-                        verticalArrangement = Arrangement.spacedBy(12.dp),
-                        horizontalArrangement = Arrangement.spacedBy(12.dp)
-                    ) {
-                        items(categories) { category ->
-                            CategoryTileCard(
-                                emoji = category.emoji,
-                                label = category.label,
-                                onClick = { selectedCategory = category }
-                            )
-                        }
-                    }
+
+                "manageWords" -> {
+                    ManageWordTilesScreen(
+                        wordTileViewModel = wordViewModel,
+                        onBack = { currentScreen = "settings" }
+                    )
                 }
+
+                "manageCategories" -> {
+                    ManageCategoriesScreen(
+                        categoryTileViewModel = categoryViewModel,
+                        onBack = { currentScreen = "settings" }
+                    )
+                }
+
                 else -> {
-                    val words by wordViewModel.getTilesByCategory(selectedCategory!!.label)
-                        .collectAsState(initial = emptyList())
-                    LazyVerticalGrid(
-                        columns = GridCells.Fixed(3),
-                        contentPadding = PaddingValues(12.dp),
-                        verticalArrangement = Arrangement.spacedBy(12.dp),
-                        horizontalArrangement = Arrangement.spacedBy(12.dp)
-                    ) {
-                        items(words) { word ->
-                            WordTileCard(
-                                emoji = word.emoji,
-                                label = word.label,
-                                isFavorite = word.isFavorite,
-                                onClick = { sentence = sentence + word.label },
-                                onToggleFavorite = {
-                                    wordViewModel.toggleFavorite(word.copy(isFavorite = !word.isFavorite))
-                                    Log.d("FavoriteToggle", "Toggled favorite for: ${word.label}")
+                    when {
+                        showFavorites -> {
+                            LazyVerticalGrid(
+                                state = favoritesGridState,
+                                columns = GridCells.Fixed(3),
+                                contentPadding = PaddingValues(12.dp),
+                                verticalArrangement = Arrangement.spacedBy(12.dp),
+                                horizontalArrangement = Arrangement.spacedBy(12.dp)
+                            ) {
+                                items(favoriteWords, key = { it.id }) { word ->
+                                    WordTileCard(
+                                        emoji = word.emoji,
+                                        label = word.label,
+                                        isFavorite = word.isFavorite,
+                                        onClick = { sentence = sentence + word.label },
+                                        onToggleFavorite = {
+                                            wordViewModel.toggleFavorite(word)
+                                            Log.d("FavoriteToggle", "Toggled favorite for: ${word.label}")
+                                        }
+                                    )
                                 }
-                            )
+                            }
+                        }
+
+                        selectedCategory == null -> {
+                            LazyVerticalGrid(
+                                state = categoryGridState,
+                                columns = GridCells.Fixed(2),
+                                contentPadding = PaddingValues(12.dp),
+                                verticalArrangement = Arrangement.spacedBy(12.dp),
+                                horizontalArrangement = Arrangement.spacedBy(12.dp)
+                            ) {
+                                items(categories, key = { it.id }) { category ->
+                                    CategoryTileCard(
+                                        emoji = category.emoji,
+                                        label = category.label,
+                                        onClick = { selectedCategory = category }
+                                    )
+                                }
+                            }
+                        }
+
+                        else -> {
+                            val words by wordViewModel
+                                .getTilesByCategory(selectedCategory!!.label)
+                                .collectAsState(initial = emptyList())
+                            LazyVerticalGrid(
+                                columns = GridCells.Fixed(3),
+                                contentPadding = PaddingValues(12.dp),
+                                verticalArrangement = Arrangement.spacedBy(12.dp),
+                                horizontalArrangement = Arrangement.spacedBy(12.dp)
+                            ) {
+                                items(words, key = { it.id }) { word ->
+                                    WordTileCard(
+                                        emoji = word.emoji,
+                                        label = word.label,
+                                        isFavorite = word.isFavorite,
+                                        onClick = { sentence = sentence + word.label },
+                                        onToggleFavorite = {
+                                            wordViewModel.toggleFavorite(word)
+                                            Log.d("FavoriteToggle", "Toggled favorite for: ${word.label}")
+                                        }
+                                    )
+                                }
+                            }
                         }
                     }
                 }
             }
+
         }
 
+        // Bottom Navigation Bar
         BottomNavigationBar(
             isInWordView = selectedCategory != null,
-            onBack = { selectedCategory = null },
+            onBack = {
+                selectedCategory = null
+                inSettings = false
+            },
             onShowFavorites = {
                 selectedCategory = null
                 showFavorites = true
+                inSettings = false
             },
             onShowHome = {
                 selectedCategory = null
                 showFavorites = false
+                inSettings = false
+            },
+            onShowSettings = {
+                selectedCategory = null
+                showFavorites = false
+                currentScreen = "settings"
             }
         )
     }
 }
+
 @Composable
 fun SentenceBar(
     words: List<String>,
@@ -295,7 +368,8 @@ fun BottomNavigationBar(
     isInWordView: Boolean,
     onBack: () -> Unit,
     onShowFavorites: () -> Unit, // ✅ add this line
-    onShowHome: () -> Unit // ✅ add this
+    onShowHome: () -> Unit, // ✅ add this
+    onShowSettings: () -> Unit // <-- add this
 ) {
     Row(
         modifier = Modifier
@@ -317,14 +391,14 @@ fun BottomNavigationBar(
                 emoji = "🏠",
                 label = "Home",
                 color = Color(0xFF90CAF9),
-                onClick = { /* Home action */ },
+                onClick = onShowHome, // ✅ uses passed function
                 modifier = Modifier.weight(1f)
             )
         }
 
         KidNavButton(
             emoji = "❤️",
-            label = "Favs",
+            label = "Faves",
             color = Color(0xFFFFCDD2),
             onClick = { onShowFavorites() },
             modifier = Modifier.weight(1f)
@@ -334,7 +408,7 @@ fun BottomNavigationBar(
             emoji = "⚙️",
             label = "Settings",
             color = Color(0xFFA5D6A7),
-            onClick = { /* Settings action */ },
+            onClick = onShowSettings,
             modifier = Modifier.weight(1f)
         )
     }
