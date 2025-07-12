@@ -2,6 +2,7 @@ plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.kotlin.android)
     alias(libs.plugins.kotlin.compose)
+    id("org.jetbrains.kotlin.kapt")
 }
 
 android {
@@ -11,7 +12,7 @@ android {
     defaultConfig {
         applicationId = "com.jareth.talktiles"
         minSdk = 24
-        targetSdk = 36
+        targetSdk = 34
         versionCode = 1
         versionName = "1.0"
 
@@ -50,9 +51,14 @@ dependencies {
     implementation(libs.androidx.ui.tooling.preview)
     implementation(libs.androidx.material3)
 
-    // Jetpack Compose Navigation
-    implementation(libs.androidx.navigation.compose)
-    implementation(libs.androidx.room.runtime.android)
+    //---------------------------------------------------------------------------
+    implementation("androidx.navigation:navigation-compose:2.9.1")
+
+    implementation("androidx.room:room-runtime:2.7.2")
+    kapt("androidx.room:room-compiler:2.7.2")
+    implementation("androidx.room:room-ktx:2.7.2")
+
+    implementation("com.google.code.gson:gson:2.13.1")
 
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)

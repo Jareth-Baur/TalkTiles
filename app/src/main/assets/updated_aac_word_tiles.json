@@ -1,0 +1,522 @@
+[
+  {
+    "emoji": "\ud83d\udc69",
+    "label": "Woman",
+    "category": "People"
+  },
+  {
+    "emoji": "\ud83d\udc68",
+    "label": "Man",
+    "category": "People"
+  },
+  {
+    "emoji": "\ud83e\uddd2",
+    "label": "Child",
+    "category": "People"
+  },
+  {
+    "emoji": "\ud83d\udc75",
+    "label": "Grandma",
+    "category": "People"
+  },
+  {
+    "emoji": "\ud83d\udc74",
+    "label": "Grandpa",
+    "category": "People"
+  },
+  {
+    "emoji": "\ud83d\udc76",
+    "label": "Baby",
+    "category": "People"
+  },
+  {
+    "emoji": "\ud83d\udc67",
+    "label": "Girl",
+    "category": "People"
+  },
+  {
+    "emoji": "\ud83d\udc66",
+    "label": "Boy",
+    "category": "People"
+  },
+  {
+    "emoji": "\ud83e\uddd1\u200d\ud83c\udfeb",
+    "label": "Teacher",
+    "category": "People"
+  },
+  {
+    "emoji": "\ud83e\uddd1\u200d\u2695\ufe0f",
+    "label": "Doctor",
+    "category": "People"
+  },
+  {
+    "emoji": "\ud83d\udc6e",
+    "label": "Police",
+    "category": "People"
+  },
+  {
+    "emoji": "\ud83d\udc77",
+    "label": "Worker",
+    "category": "People"
+  },
+  {
+    "emoji": "\ud83d\udc68\u200d\ud83c\udf73",
+    "label": "Chef",
+    "category": "People"
+  },
+  {
+    "emoji": "\ud83e\uddd1\u200d\ud83c\udf93",
+    "label": "Student",
+    "category": "People"
+  },
+  {
+    "emoji": "\ud83e\uddd1\u200d\ud83d\ude92",
+    "label": "Firefighter",
+    "category": "People"
+  },
+  {
+    "emoji": "\ud83e\uddd1\u200d\ud83c\udfa4",
+    "label": "Singer",
+    "category": "People"
+  },
+  {
+    "emoji": "\ud83e\uddd1\u200d\ud83d\udcbb",
+    "label": "Coder",
+    "category": "People"
+  },
+  {
+    "emoji": "\ud83e\uddd1\u200d\ud83d\ude80",
+    "label": "Astronaut",
+    "category": "People"
+  },
+  {
+    "emoji": "\ud83e\uddd1\u200d\ud83d\udd2c",
+    "label": "Scientist",
+    "category": "People"
+  },
+  {
+    "emoji": "\ud83e\uddd1\u200d\ud83c\udfa8",
+    "label": "Artist",
+    "category": "People"
+  },
+  {
+    "emoji": "\ud83d\ude00",
+    "label": "Happy",
+    "category": "Emotions"
+  },
+  {
+    "emoji": "\ud83d\ude22",
+    "label": "Sad",
+    "category": "Emotions"
+  },
+  {
+    "emoji": "\ud83d\ude20",
+    "label": "Angry",
+    "category": "Emotions"
+  },
+  {
+    "emoji": "\ud83d\ude28",
+    "label": "Scared",
+    "category": "Emotions"
+  },
+  {
+    "emoji": "\ud83e\udd70",
+    "label": "Loved",
+    "category": "Emotions"
+  },
+  {
+    "emoji": "\ud83e\udd71",
+    "label": "Tired",
+    "category": "Emotions"
+  },
+  {
+    "emoji": "\ud83d\ude12",
+    "label": "Bored",
+    "category": "Emotions"
+  },
+  {
+    "emoji": "\ud83e\udd12",
+    "label": "Sick",
+    "category": "Emotions"
+  },
+  {
+    "emoji": "\ud83d\ude0e",
+    "label": "Cool",
+    "category": "Emotions"
+  },
+  {
+    "emoji": "\ud83c\udf55",
+    "label": "Pizza",
+    "category": "Food"
+  },
+  {
+    "emoji": "\ud83c\udf4e",
+    "label": "Apple",
+    "category": "Food"
+  },
+  {
+    "emoji": "\ud83c\udf5e",
+    "label": "Bread",
+    "category": "Food"
+  },
+  {
+    "emoji": "\ud83c\udf54",
+    "label": "Burger",
+    "category": "Food"
+  },
+  {
+    "emoji": "\ud83c\udf5f",
+    "label": "Fries",
+    "category": "Food"
+  },
+  {
+    "emoji": "\ud83c\udf57",
+    "label": "Chicken",
+    "category": "Food"
+  },
+  {
+    "emoji": "\ud83e\udd5a",
+    "label": "Egg",
+    "category": "Food"
+  },
+  {
+    "emoji": "\ud83c\udf47",
+    "label": "Grapes",
+    "category": "Food"
+  },
+  {
+    "emoji": "\ud83c\udf49",
+    "label": "Watermelon",
+    "category": "Food"
+  },
+  {
+    "emoji": "\ud83e\udd5b",
+    "label": "Milk",
+    "category": "Drinks"
+  },
+  {
+    "emoji": "\ud83e\uddc3",
+    "label": "Juice",
+    "category": "Drinks"
+  },
+  {
+    "emoji": "\ud83c\udf7c",
+    "label": "Bottle",
+    "category": "Drinks"
+  },
+  {
+    "emoji": "\ud83c\udf75",
+    "label": "Tea",
+    "category": "Drinks"
+  },
+  {
+    "emoji": "\ud83e\udd64",
+    "label": "Soda",
+    "category": "Drinks"
+  },
+  {
+    "emoji": "\ud83c\udfc3",
+    "label": "Run",
+    "category": "Actions"
+  },
+  {
+    "emoji": "\ud83d\udecf",
+    "label": "Sleep",
+    "category": "Actions"
+  },
+  {
+    "emoji": "\ud83e\uddfc",
+    "label": "Wash",
+    "category": "Actions"
+  },
+  {
+    "emoji": "\ud83d\udde3\ufe0f",
+    "label": "Talk",
+    "category": "Actions"
+  },
+  {
+    "emoji": "\ud83e\udea5",
+    "label": "Brush",
+    "category": "Actions"
+  },
+  {
+    "emoji": "\ud83e\uddcd",
+    "label": "Stand",
+    "category": "Actions"
+  },
+  {
+    "emoji": "\ud83d\udc42",
+    "label": "Listen",
+    "category": "Actions"
+  },
+  {
+    "emoji": "\ud83d\udc40",
+    "label": "Look",
+    "category": "Actions"
+  },
+  {
+    "emoji": "\ud83c\udfe0",
+    "label": "Home",
+    "category": "Places"
+  },
+  {
+    "emoji": "\ud83c\udfeb",
+    "label": "School",
+    "category": "Places"
+  },
+  {
+    "emoji": "\ud83c\udfe5",
+    "label": "Hospital",
+    "category": "Places"
+  },
+  {
+    "emoji": "\ud83d\uded2",
+    "label": "Store",
+    "category": "Places"
+  },
+  {
+    "emoji": "\ud83c\udf33",
+    "label": "Park",
+    "category": "Places"
+  },
+  {
+    "emoji": "\u23f0",
+    "label": "Wake up",
+    "category": "Daily Routines"
+  },
+  {
+    "emoji": "\ud83d\udec1",
+    "label": "Bath",
+    "category": "Daily Routines"
+  },
+  {
+    "emoji": "\ud83e\udea5",
+    "label": "Brush teeth",
+    "category": "Daily Routines"
+  },
+  {
+    "emoji": "\ud83c\udf7d",
+    "label": "Eat",
+    "category": "Daily Routines"
+  },
+  {
+    "emoji": "\ud83e\uddf4",
+    "label": "Lotion",
+    "category": "Daily Routines"
+  },
+  {
+    "emoji": "\ud83c\udf92",
+    "label": "Pack bag",
+    "category": "Daily Routines"
+  },
+  {
+    "emoji": "\ud83d\udebd",
+    "label": "Toilet",
+    "category": "Daily Routines"
+  },
+  {
+    "emoji": "\ud83e\uddfa",
+    "label": "Laundry",
+    "category": "Daily Routines"
+  },
+  {
+    "emoji": "\ud83d\udecc",
+    "label": "Bedtime",
+    "category": "Daily Routines"
+  },
+  {
+    "emoji": "\ud83d\udc55",
+    "label": "Shirt",
+    "category": "Clothing"
+  },
+  {
+    "emoji": "\ud83d\udc56",
+    "label": "Pants",
+    "category": "Clothing"
+  },
+  {
+    "emoji": "\ud83e\udde6",
+    "label": "Socks",
+    "category": "Clothing"
+  },
+  {
+    "emoji": "\ud83d\udc5f",
+    "label": "Shoes",
+    "category": "Clothing"
+  },
+  {
+    "emoji": "\ud83e\udde2",
+    "label": "Hat",
+    "category": "Clothing"
+  },
+  {
+    "emoji": "\ud83e\udde5",
+    "label": "Jacket",
+    "category": "Clothing"
+  },
+  {
+    "emoji": "\ud83d\udc57",
+    "label": "Dress",
+    "category": "Clothing"
+  },
+  {
+    "emoji": "\ud83d\udc48",
+    "label": "I",
+    "category": "Pronouns"
+  },
+  {
+    "emoji": "\ud83d\udc49",
+    "label": "You",
+    "category": "Pronouns"
+  },
+  {
+    "emoji": "\ud83d\udc64",
+    "label": "He",
+    "category": "Pronouns"
+  },
+  {
+    "emoji": "\ud83d\udc69",
+    "label": "She",
+    "category": "Pronouns"
+  },
+  {
+    "emoji": "\ud83d\udc65",
+    "label": "They",
+    "category": "Pronouns"
+  },
+  {
+    "emoji": "\ud83e\udd1d",
+    "label": "We",
+    "category": "Pronouns"
+  },
+  {
+    "emoji": "\u2753",
+    "label": "What",
+    "category": "Questions"
+  },
+  {
+    "emoji": "\u2753",
+    "label": "Where",
+    "category": "Questions"
+  },
+  {
+    "emoji": "\u2753",
+    "label": "Who",
+    "category": "Questions"
+  },
+  {
+    "emoji": "\u2753",
+    "label": "Why",
+    "category": "Questions"
+  },
+  {
+    "emoji": "\u2753",
+    "label": "How",
+    "category": "Questions"
+  },
+  {
+    "emoji": "\u23f0",
+    "label": "When",
+    "category": "Questions"
+  },
+  {
+    "emoji": "\u270b",
+    "label": "Stop",
+    "category": "Commands"
+  },
+  {
+    "emoji": "\ud83d\udc49",
+    "label": "Go",
+    "category": "Commands"
+  },
+  {
+    "emoji": "\ud83c\udd98",
+    "label": "Help",
+    "category": "Commands"
+  },
+  {
+    "emoji": "\ud83d\udd07",
+    "label": "Quiet",
+    "category": "Commands"
+  },
+  {
+    "emoji": "\ud83d\udc4b",
+    "label": "Come here",
+    "category": "Commands"
+  },
+  {
+    "emoji": "\ud83d\udd01",
+    "label": "Again",
+    "category": "Commands"
+  },
+  {
+    "emoji": "\ud83d\udd34",
+    "label": "Red",
+    "category": "Colors"
+  },
+  {
+    "emoji": "\ud83d\udfe0",
+    "label": "Orange",
+    "category": "Colors"
+  },
+  {
+    "emoji": "\ud83d\udfe1",
+    "label": "Yellow",
+    "category": "Colors"
+  },
+  {
+    "emoji": "\ud83d\udfe2",
+    "label": "Green",
+    "category": "Colors"
+  },
+  {
+    "emoji": "\ud83d\udd35",
+    "label": "Blue",
+    "category": "Colors"
+  },
+  {
+    "emoji": "\ud83d\udfe3",
+    "label": "Purple",
+    "category": "Colors"
+  },
+  {
+    "emoji": "\u26ab",
+    "label": "Black",
+    "category": "Colors"
+  },
+  {
+    "emoji": "\u26aa",
+    "label": "White",
+    "category": "Colors"
+  },
+  {
+    "emoji": "\ud83d\udfe4",
+    "label": "Brown",
+    "category": "Colors"
+  },
+  {
+    "emoji": "\u2764\ufe0f",
+    "label": "Love",
+    "category": "Favorites"
+  },
+  {
+    "emoji": "\ud83d\udca1",
+    "label": "Yes",
+    "category": "Favorites"
+  },
+  {
+    "emoji": "\u274c",
+    "label": "No",
+    "category": "Favorites"
+  },
+  {
+    "emoji": "\ud83d\ude42",
+    "label": "Okay",
+    "category": "Favorites"
+  },
+  {
+    "emoji": "\ud83d\ude4b",
+    "label": "Help",
+    "category": "Favorites"
+  }
+]

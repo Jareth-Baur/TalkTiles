@@ -1,0 +1,472 @@
+[
+    {
+        "emoji": "👩",
+        "label": "Woman",
+        "category": "People"
+    },
+    {
+        "emoji": "👨",
+        "label": "Man",
+        "category": "People"
+    },
+    {
+        "emoji": "🧒",
+        "label": "Child",
+        "category": "People"
+    },
+    {
+        "emoji": "👵",
+        "label": "Grandma",
+        "category": "People"
+    },
+    {
+        "emoji": "👴",
+        "label": "Grandpa",
+        "category": "People"
+    },
+    {
+        "emoji": "👶",
+        "label": "Baby",
+        "category": "People"
+    },
+    {
+        "emoji": "👧",
+        "label": "Girl",
+        "category": "People"
+    },
+    {
+        "emoji": "👦",
+        "label": "Boy",
+        "category": "People"
+    },
+    {
+        "emoji": "🧑‍🏫",
+        "label": "Teacher",
+        "category": "People"
+    },
+    {
+        "emoji": "🧑‍⚕️",
+        "label": "Doctor",
+        "category": "People"
+    },
+    {
+        "emoji": "😀",
+        "label": "Happy",
+        "category": "Emotions"
+    },
+    {
+        "emoji": "😢",
+        "label": "Sad",
+        "category": "Emotions"
+    },
+    {
+        "emoji": "😠",
+        "label": "Angry",
+        "category": "Emotions"
+    },
+    {
+        "emoji": "😨",
+        "label": "Scared",
+        "category": "Emotions"
+    },
+    {
+        "emoji": "🥰",
+        "label": "Loved",
+        "category": "Emotions"
+    },
+    {
+        "emoji": "🥱",
+        "label": "Tired",
+        "category": "Emotions"
+    },
+    {
+        "emoji": "😒",
+        "label": "Bored",
+        "category": "Emotions"
+    },
+    {
+        "emoji": "🤒",
+        "label": "Sick",
+        "category": "Emotions"
+    },
+    {
+        "emoji": "😎",
+        "label": "Cool",
+        "category": "Emotions"
+    },
+    {
+        "emoji": "🍕",
+        "label": "Pizza",
+        "category": "Food"
+    },
+    {
+        "emoji": "🍎",
+        "label": "Apple",
+        "category": "Food"
+    },
+    {
+        "emoji": "🍞",
+        "label": "Bread",
+        "category": "Food"
+    },
+    {
+        "emoji": "🍔",
+        "label": "Burger",
+        "category": "Food"
+    },
+    {
+        "emoji": "🍟",
+        "label": "Fries",
+        "category": "Food"
+    },
+    {
+        "emoji": "🍗",
+        "label": "Chicken",
+        "category": "Food"
+    },
+    {
+        "emoji": "🥚",
+        "label": "Egg",
+        "category": "Food"
+    },
+    {
+        "emoji": "🍇",
+        "label": "Grapes",
+        "category": "Food"
+    },
+    {
+        "emoji": "🍉",
+        "label": "Watermelon",
+        "category": "Food"
+    },
+    {
+        "emoji": "🥛",
+        "label": "Milk",
+        "category": "Drinks"
+    },
+    {
+        "emoji": "🧃",
+        "label": "Juice",
+        "category": "Drinks"
+    },
+    {
+        "emoji": "🍼",
+        "label": "Bottle",
+        "category": "Drinks"
+    },
+    {
+        "emoji": "🍵",
+        "label": "Tea",
+        "category": "Drinks"
+    },
+    {
+        "emoji": "🥤",
+        "label": "Soda",
+        "category": "Drinks"
+    },
+    {
+        "emoji": "🏃",
+        "label": "Run",
+        "category": "Actions"
+    },
+    {
+        "emoji": "🛏",
+        "label": "Sleep",
+        "category": "Actions"
+    },
+    {
+        "emoji": "🧼",
+        "label": "Wash",
+        "category": "Actions"
+    },
+    {
+        "emoji": "🗣️",
+        "label": "Talk",
+        "category": "Actions"
+    },
+    {
+        "emoji": "🪥",
+        "label": "Brush",
+        "category": "Actions"
+    },
+    {
+        "emoji": "🧍",
+        "label": "Stand",
+        "category": "Actions"
+    },
+    {
+        "emoji": "👂",
+        "label": "Listen",
+        "category": "Actions"
+    },
+    {
+        "emoji": "👀",
+        "label": "Look",
+        "category": "Actions"
+    },
+    {
+        "emoji": "🏠",
+        "label": "Home",
+        "category": "Places"
+    },
+    {
+        "emoji": "🏫",
+        "label": "School",
+        "category": "Places"
+    },
+    {
+        "emoji": "🏥",
+        "label": "Hospital",
+        "category": "Places"
+    },
+    {
+        "emoji": "🛒",
+        "label": "Store",
+        "category": "Places"
+    },
+    {
+        "emoji": "🌳",
+        "label": "Park",
+        "category": "Places"
+    },
+    {
+        "emoji": "❤️",
+        "label": "Love",
+        "category": "Favorites"
+    },
+    {
+        "emoji": "💡",
+        "label": "Yes",
+        "category": "Favorites"
+    },
+    {
+        "emoji": "❌",
+        "label": "No",
+        "category": "Favorites"
+    },
+    {
+        "emoji": "🙂",
+        "label": "Okay",
+        "category": "Favorites"
+    },
+    {
+        "emoji": "🙋",
+        "label": "Help",
+        "category": "Favorites"
+    },
+    {
+        "emoji": "⏰",
+        "label": "Wake up",
+        "category": "Daily Routines"
+    },
+    {
+        "emoji": "🛁",
+        "label": "Bath",
+        "category": "Daily Routines"
+    },
+    {
+        "emoji": "🪥",
+        "label": "Brush teeth",
+        "category": "Daily Routines"
+    },
+    {
+        "emoji": "🍽",
+        "label": "Eat",
+        "category": "Daily Routines"
+    },
+    {
+        "emoji": "🧴",
+        "label": "Lotion",
+        "category": "Daily Routines"
+    },
+    {
+        "emoji": "🎒",
+        "label": "Pack bag",
+        "category": "Daily Routines"
+    },
+    {
+        "emoji": "🚽",
+        "label": "Toilet",
+        "category": "Daily Routines"
+    },
+    {
+        "emoji": "🧺",
+        "label": "Laundry",
+        "category": "Daily Routines"
+    },
+    {
+        "emoji": "🛌",
+        "label": "Bedtime",
+        "category": "Daily Routines"
+    },
+    {
+        "emoji": "👕",
+        "label": "Shirt",
+        "category": "Clothing"
+    },
+    {
+        "emoji": "👖",
+        "label": "Pants",
+        "category": "Clothing"
+    },
+    {
+        "emoji": "🧦",
+        "label": "Socks",
+        "category": "Clothing"
+    },
+    {
+        "emoji": "👟",
+        "label": "Shoes",
+        "category": "Clothing"
+    },
+    {
+        "emoji": "🧢",
+        "label": "Hat",
+        "category": "Clothing"
+    },
+    {
+        "emoji": "🧥",
+        "label": "Jacket",
+        "category": "Clothing"
+    },
+    {
+        "emoji": "👗",
+        "label": "Dress",
+        "category": "Clothing"
+    },
+    {
+        "emoji": "✋",
+        "label": "Stop",
+        "category": "Commands"
+    },
+    {
+        "emoji": "👉",
+        "label": "Go",
+        "category": "Commands"
+    },
+    {
+        "emoji": "🆘",
+        "label": "Help",
+        "category": "Commands"
+    },
+    {
+        "emoji": "🔇",
+        "label": "Quiet",
+        "category": "Commands"
+    },
+    {
+        "emoji": "👋",
+        "label": "Come here",
+        "category": "Commands"
+    },
+    {
+        "emoji": "🔁",
+        "label": "Again",
+        "category": "Commands"
+    },
+    {
+        "emoji": "👈",
+        "label": "I",
+        "category": "Pronouns"
+    },
+    {
+        "emoji": "👉",
+        "label": "You",
+        "category": "Pronouns"
+    },
+    {
+        "emoji": "👤",
+        "label": "He",
+        "category": "Pronouns"
+    },
+    {
+        "emoji": "👩",
+        "label": "She",
+        "category": "Pronouns"
+    },
+    {
+        "emoji": "👥",
+        "label": "They",
+        "category": "Pronouns"
+    },
+    {
+        "emoji": "🤝",
+        "label": "We",
+        "category": "Pronouns"
+    },
+    {
+        "emoji": "❓",
+        "label": "What",
+        "category": "Questions"
+    },
+    {
+        "emoji": "❓",
+        "label": "Where",
+        "category": "Questions"
+    },
+    {
+        "emoji": "❓",
+        "label": "Who",
+        "category": "Questions"
+    },
+    {
+        "emoji": "❓",
+        "label": "Why",
+        "category": "Questions"
+    },
+    {
+        "emoji": "❓",
+        "label": "How",
+        "category": "Questions"
+    },
+    {
+        "emoji": "⏰",
+        "label": "When",
+        "category": "Questions"
+    },
+    {
+        "emoji": "🔴",
+        "label": "Red",
+        "category": "Colors"
+    },
+    {
+        "emoji": "🟠",
+        "label": "Orange",
+        "category": "Colors"
+    },
+    {
+        "emoji": "🟡",
+        "label": "Yellow",
+        "category": "Colors"
+    },
+    {
+        "emoji": "🟢",
+        "label": "Green",
+        "category": "Colors"
+    },
+    {
+        "emoji": "🔵",
+        "label": "Blue",
+        "category": "Colors"
+    },
+    {
+        "emoji": "🟣",
+        "label": "Purple",
+        "category": "Colors"
+    },
+    {
+        "emoji": "⚫",
+        "label": "Black",
+        "category": "Colors"
+    },
+    {
+        "emoji": "⚪",
+        "label": "White",
+        "category": "Colors"
+    },
+    {
+        "emoji": "🟤",
+        "label": "Brown",
+        "category": "Colors"
+    }
+]
