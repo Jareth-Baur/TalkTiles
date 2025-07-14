@@ -40,7 +40,10 @@ fun CategoryTileCard(label: String, emoji: String, onClick: () -> Unit) {
     Button(
         onClick = onClick,
         shape = RoundedCornerShape(16.dp),
-        colors = ButtonDefaults.buttonColors(containerColor = backgroundColor),
+        colors = ButtonDefaults.buttonColors(
+            containerColor = backgroundColor,
+            contentColor = Color.Black   // ⬅️ Set text/icon color to black
+        ),
         modifier = Modifier
             .fillMaxWidth()
             .aspectRatio(1f),
@@ -58,6 +61,7 @@ fun CategoryTileCard(label: String, emoji: String, onClick: () -> Unit) {
         }
     }
 }
+
 @Composable
 fun WordTileCard(
     emoji: String,
@@ -71,7 +75,10 @@ fun WordTileCard(
     Button(
         onClick = onClick,
         shape = RoundedCornerShape(16.dp),
-        colors = ButtonDefaults.buttonColors(containerColor = backgroundColor),
+        colors = ButtonDefaults.buttonColors(
+            containerColor = backgroundColor,
+            contentColor = Color.Black   // ⬅️ Black text for emoji/label/favorite
+        ),
         modifier = Modifier
             .fillMaxWidth()
             .aspectRatio(1f),
@@ -90,11 +97,12 @@ fun WordTileCard(
                 fontSize = 20.sp,
                 modifier = Modifier
                     .padding(top = 4.dp)
-                    .noRippleClickable { onToggleFavorite() } // <- correct usage
+                    .noRippleClickable { onToggleFavorite() }
             )
         }
     }
 }
+
 @Composable
 fun Modifier.noRippleClickable(onClick: () -> Unit): Modifier {
     val interactionSource = remember { MutableInteractionSource() }

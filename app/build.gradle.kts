@@ -62,6 +62,8 @@ dependencies {
 
     implementation("androidx.compose.material:material-icons-extended")
 
+    implementation("androidx.navigation:navigation-compose:2.9.1")
+    implementation("com.google.accompanist:accompanist-navigation-animation:0.36.0")
 
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)

@@ -1,5 +1,6 @@
 package com.jareth.talktiles.ui
 
+import TTSManager
 import android.speech.tts.TextToSpeech
 import android.util.Log
 import androidx.compose.foundation.horizontalScroll
@@ -25,12 +26,10 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.DisposableEffect
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
 import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
@@ -45,33 +44,25 @@ import com.jareth.talktiles.data.CategoryTile
 import com.jareth.talktiles.data.WordTileRepository
 import com.jareth.talktiles.ui.components.CategoryTileCard
 import com.jareth.talktiles.ui.components.WordTileCard
+import com.jareth.talktiles.ui.screens.AboutScreen
+import com.jareth.talktiles.ui.screens.LanguageScreen
 import com.jareth.talktiles.ui.screens.ManageCategoriesScreen
 import com.jareth.talktiles.ui.screens.ManageWordTilesScreen
+import com.jareth.talktiles.ui.screens.ResetAndManageDataScreen
 import com.jareth.talktiles.ui.screens.SettingsScreen
+import com.jareth.talktiles.ui.screens.VoiceSettingsScreen
 import com.jareth.talktiles.viewmodel.CategoryTileViewModel
 import com.jareth.talktiles.viewmodel.CategoryTileViewModelFactory
 import com.jareth.talktiles.viewmodel.WordTileViewModel
 import com.jareth.talktiles.viewmodel.WordTileViewModelFactory
-import java.util.Locale
 
 @Composable
 fun MainScreen() {
     val context = LocalContext.current
 
     // Text-to-Speech setup
-    val ttsRef = remember { mutableStateOf<TextToSpeech?>(null) }
     LaunchedEffect(Unit) {
-        ttsRef.value = TextToSpeech(context) { status ->
-            if (status == TextToSpeech.SUCCESS) {
-                ttsRef.value?.language = Locale.US
-            }
-        }
-    }
-    DisposableEffect(Unit) {
-        onDispose {
-            ttsRef.value?.stop()
-            ttsRef.value?.shutdown()
-        }
+        TTSManager.init(context)
     }
 
     // ViewModels
@@ -102,12 +93,9 @@ fun MainScreen() {
         LazyGridState()
     }
 
-    var inSettings by rememberSaveable { mutableStateOf(false) }
-
     var isParentModeEnabled by rememberSaveable { mutableStateOf(false) }
 
     var currentScreen by rememberSaveable { mutableStateOf("main") }
-
 
     Column(
         modifier = Modifier
@@ -115,12 +103,14 @@ fun MainScreen() {
             .padding(8.dp)
     ) {
         // Sentence bar
-        if (currentScreen != "settings" && currentScreen != "manageWords" && currentScreen != "manageCategories") {
-        SentenceBar(
+        if (currentScreen != "settings" && currentScreen != "manageWords" &&
+            currentScreen != "manageCategories" && currentScreen != "about" &&
+            currentScreen != "voice" && currentScreen != "language" && currentScreen != "data") {
+            SentenceBar(
                 words = sentence,
                 onSpeak = {
                     val text = sentence.joinToString(" ")
-                    ttsRef.value?.speak(text, TextToSpeech.QUEUE_FLUSH, null, null)
+                    TTSManager.getTTS()?.speak(text, TextToSpeech.QUEUE_FLUSH, null, "TTS_UTTERANCE_ID")
                 },
                 onClear = { sentence = emptyList() },
                 onDeleteLast = {
@@ -140,10 +130,32 @@ fun MainScreen() {
             when (currentScreen) {
                 "settings" -> {
                     SettingsScreen(
-                        wordTileViewModel = wordViewModel,
-                        categoryTileViewModel = categoryViewModel,
                         isParentModeEnabled = isParentModeEnabled,
                         onToggleParentMode = { isParentModeEnabled = it },
+                        onNavigateTo = { destination -> currentScreen = destination }
+                    )
+                }
+
+                "about" -> {
+                    AboutScreen(onBack = { currentScreen = "settings" })
+                }
+
+                "voice" -> {
+                    VoiceSettingsScreen(onBack = { currentScreen = "settings" })
+                }
+
+                "language" -> {
+                    LanguageScreen(onBack = { currentScreen = "settings" })
+                }
+
+                "data" -> {
+                    ResetAndManageDataScreen(
+                        onBack = { currentScreen = "settings" },
+                        onResetFavorites = { wordViewModel.resetFavorites() },
+                        onResetAll = {
+                            wordViewModel.deleteAll()
+                            categoryViewModel.deleteAll()
+                        },
                         onManageWords = { currentScreen = "manageWords" },
                         onManageCategories = { currentScreen = "manageCategories" }
                     )
@@ -152,6 +164,7 @@ fun MainScreen() {
                 "manageWords" -> {
                     ManageWordTilesScreen(
                         wordTileViewModel = wordViewModel,
+                        categoryTileViewModel = categoryViewModel,
                         onBack = { currentScreen = "settings" }
                     )
                 }
@@ -234,6 +247,7 @@ fun MainScreen() {
                 }
             }
 
+
         }
 
         // Bottom Navigation Bar
@@ -241,17 +255,18 @@ fun MainScreen() {
             isInWordView = selectedCategory != null,
             onBack = {
                 selectedCategory = null
-                inSettings = false
+                showFavorites = false
+                currentScreen = "main"
             },
             onShowFavorites = {
                 selectedCategory = null
                 showFavorites = true
-                inSettings = false
+                currentScreen = "main"
             },
             onShowHome = {
                 selectedCategory = null
                 showFavorites = false
-                inSettings = false
+                currentScreen = "main"
             },
             onShowSettings = {
                 selectedCategory = null
@@ -279,30 +294,34 @@ fun SentenceBar(
         Column(
             modifier = Modifier
                 .fillMaxWidth()
-                .padding(16.dp) // more padding for space
+                .padding(16.dp)
         ) {
-            // Sentence preview
             Row(
                 modifier = Modifier
                     .fillMaxWidth()
                     .horizontalScroll(rememberScrollState())
-                    .padding(bottom = 12.dp), // increased bottom space
+                    .padding(bottom = 12.dp),
                 verticalAlignment = Alignment.CenterVertically
             ) {
                 if (words.isEmpty()) {
                     Text(
                         text = "Tap tiles to build a sentence",
-                        style = MaterialTheme.typography.bodyLarge.copy(fontSize = 18.sp)
+                        style = MaterialTheme.typography.bodyLarge.copy(
+                            fontSize = 18.sp,
+                            color = Color.Black
+                        )
                     )
                 } else {
                     Text(
                         text = words.joinToString(" "),
-                        style = MaterialTheme.typography.bodyLarge.copy(fontSize = 20.sp)
+                        style = MaterialTheme.typography.bodyLarge.copy(
+                            fontSize = 20.sp,
+                            color = Color.Black
+                        )
                     )
                 }
             }
 
-            // Buttons row
             Row(
                 modifier = Modifier.fillMaxWidth(),
                 horizontalArrangement = Arrangement.SpaceEvenly,
@@ -312,6 +331,7 @@ fun SentenceBar(
                     emoji = "🧹",
                     label = "Clear",
                     color = Color(0xFFFFF59D),
+                    contentColor = Color.Black,
                     onClick = onClear,
                     enabled = words.isNotEmpty(),
                     modifier = Modifier.weight(1f)
@@ -320,6 +340,7 @@ fun SentenceBar(
                     emoji = "🗑",
                     label = "Undo",
                     color = Color(0xFFFFCCBC),
+                    contentColor = Color.Black,
                     onClick = onDeleteLast,
                     enabled = words.isNotEmpty(),
                     modifier = Modifier.weight(1f)
@@ -328,6 +349,7 @@ fun SentenceBar(
                     emoji = "🔊",
                     label = "Speak",
                     color = Color(0xFFB2EBF2),
+                    contentColor = Color.Black,
                     onClick = onSpeak,
                     enabled = words.isNotEmpty(),
                     modifier = Modifier.weight(1f)
@@ -344,20 +366,24 @@ fun KidActionButton(
     color: Color,
     onClick: () -> Unit,
     enabled: Boolean,
-    modifier: Modifier = Modifier
+    modifier: Modifier = Modifier,
+    contentColor: Color = Color.Black // ✅ default to black text
 ) {
     Button(
         onClick = onClick,
         shape = RoundedCornerShape(12.dp),
         enabled = enabled,
-        colors = ButtonDefaults.buttonColors(containerColor = color),
+        colors = ButtonDefaults.buttonColors(
+            containerColor = color,
+            contentColor = contentColor // ✅ apply the text color
+        ),
         modifier = modifier.padding(horizontal = 4.dp)
     ) {
         Column(
             horizontalAlignment = Alignment.CenterHorizontally,
-            verticalArrangement = Arrangement.spacedBy(2.dp) // <– tiny space between emoji and label
+            verticalArrangement = Arrangement.spacedBy(2.dp)
         ) {
-            Text(text = emoji, fontSize = 30.sp) // slightly bigger
+            Text(text = emoji, fontSize = 30.sp)
             Text(text = label, fontSize = 13.sp)
         }
     }
@@ -367,9 +393,9 @@ fun KidActionButton(
 fun BottomNavigationBar(
     isInWordView: Boolean,
     onBack: () -> Unit,
-    onShowFavorites: () -> Unit, // ✅ add this line
-    onShowHome: () -> Unit, // ✅ add this
-    onShowSettings: () -> Unit // <-- add this
+    onShowFavorites: () -> Unit,
+    onShowHome: () -> Unit,
+    onShowSettings: () -> Unit
 ) {
     Row(
         modifier = Modifier
@@ -383,7 +409,8 @@ fun BottomNavigationBar(
                 emoji = "⬅️",
                 label = "Back",
                 color = Color(0xFFB39DDB),
-                onClick = { onBack() },
+                contentColor = Color.Black, // ⬅️ Black text
+                onClick = onBack,
                 modifier = Modifier.weight(1f)
             )
         } else {
@@ -391,7 +418,8 @@ fun BottomNavigationBar(
                 emoji = "🏠",
                 label = "Home",
                 color = Color(0xFF90CAF9),
-                onClick = onShowHome, // ✅ uses passed function
+                contentColor = Color.Black,
+                onClick = onShowHome,
                 modifier = Modifier.weight(1f)
             )
         }
@@ -400,7 +428,8 @@ fun BottomNavigationBar(
             emoji = "❤️",
             label = "Faves",
             color = Color(0xFFFFCDD2),
-            onClick = { onShowFavorites() },
+            contentColor = Color.Black,
+            onClick = onShowFavorites,
             modifier = Modifier.weight(1f)
         )
 
@@ -408,6 +437,7 @@ fun BottomNavigationBar(
             emoji = "⚙️",
             label = "Settings",
             color = Color(0xFFA5D6A7),
+            contentColor = Color.Black,
             onClick = onShowSettings,
             modifier = Modifier.weight(1f)
         )
@@ -415,18 +445,20 @@ fun BottomNavigationBar(
 }
 
 
+
 @Composable
 fun KidNavButton(
     emoji: String,
     label: String,
     color: Color,
+    contentColor: Color = Color.Black,
     modifier: Modifier = Modifier,
     onClick: () -> Unit
 ) {
     Button(
         onClick = onClick,
         shape = RoundedCornerShape(12.dp),
-        colors = ButtonDefaults.buttonColors(containerColor = color),
+        colors = ButtonDefaults.buttonColors(containerColor = color,contentColor = contentColor),
         modifier = Modifier.padding(horizontal = 4.dp)
     ) {
         Column(horizontalAlignment = Alignment.CenterHorizontally) {
