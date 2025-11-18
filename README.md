@@ -42,7 +42,6 @@ An assistive communication app built with **Jetpack Compose**, designed to help 
 |-------------------|-------------------|
 | ![Manage Categories](screenshots/manage-category.jpg) | ![Manage Words](screenshots/manage-word.jpg) |
 
-> 📸 Place your real screenshots in the `screenshots/` directory and ensure filenames match.
 
 ---
 
@@ -69,5 +68,5 @@ This ensures a safe experience for children while giving parents full control ov
 ### 1. Clone the Repo
 
 ```bash
-git clone https://github.com/your-username/talk-tiles.git
-cd talk-tiles
+git clone https://github.com/Jareth-Baur/TalkTiles.git
+cd TalkTiles
