@@ -28,19 +28,19 @@ An assistive communication app built with **Jetpack Compose**, designed to help 
 
 | Home Screen | Category > Word View | Sentence Bar |
 |-------------|----------------------|--------------|
-| ![Home](screenshots/category.png) | ![Category to Word](screenshots/categories.png) | ![Sentence](screenshots/sentencebar.png) |
+| ![Home](screenshots/category.jpg) | ![Category to Word](screenshots/word.jpg) | ![Sentence](screenshots/sentencebar.jpg) |
 
 ### ❤️ Favorites and ⚙️ Settings
 
 | Favorites | Settings | Parent Mode Options |
 |----------|----------|---------------------|
-| ![Favorites](screenshots/fave.png) | ![Settings](screenshots/settings1.png) | ![Parent Mode](screenshots/settings2.png) |
+| ![Favorites](screenshots/fave.jpg) | ![Settings](screenshots/settings1.jpg) | ![Parent Mode](screenshots/settings2.jpg) |
 
 ### 🛠️ Manage Data
 
 | Manage Categories | Manage Word Tiles |
 |-------------------|-------------------|
-| ![Manage Categories](screenshots/manage-category.png) | ![Manage Words](screenshots/manage-word.png) |
+| ![Manage Categories](screenshots/manage-category.jpg) | ![Manage Words](screenshots/manage-word.jpg) |
 
 > 📸 Place your real screenshots in the `screenshots/` directory and ensure filenames match.
 
